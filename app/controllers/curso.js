@@ -1,4 +1,6 @@
-var cursos = []
+var cursos = [
+    {_id: 1, nome: 'ADS'}
+]
    
    module.exports = function() {
        var controller = {};
