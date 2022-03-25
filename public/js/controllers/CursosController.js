@@ -1,16 +1,32 @@
 angular.module('ifsp').controller('CursosController',
-	function($scope) {
-		$scope.total = 0;
-		$scope.incrementa = function() {
-			$scope.total++;
-		};
-
-		$scope.cursos  = [
-		{_id: 1, curso: 'Engenharia de Produção', coordenador: 'fabio.teixeira@ifsp.edu.br'},
- 		{_id: 2, curso: 'Tecnologia em Análise e Desenvolvimento de Sistemas', coordenador: 'fabiano.teixeira@ifsp.edu.br'},
- 		{_id: 3, curso: 'Licenciatura em Letras Português/Inglês', coordenador: 'melissa.teixeira@ifsp.edu.br'},
- 		{_id: 4, curso: 'Tecnologia em Gestão Pública', coordenador: 'melissa.teixeira@ifsp.edu.br'}
-        ];
-
+    function($resource, $scope) {
+        $scope.cursos = [];
         $scope.filtro = '';
-});
+        $scope.mensagem = { texto: '' };
+        var Curso = $resource('/cursos/:id');
+
+        function buscaCursos() {
+            Curso.query(
+                function(cursos) {
+                    $scope.cursos = cursos;
+                    $scope.mensagem = {};
+                },
+                function(erro) {
+                    console.log("Não foi possível obter a lista de cursos");
+                    console.log(erro);
+                    $scope.mensagem = { texto: "Não foi possível obter a lista de cursos" };
+                }
+            );
+        }
+        buscaContatos();
+        $scope.remove = function(curso) {
+            console.log(curso);
+            Contato.delete({ id: curso._id },
+                buscaCursos,
+                function(erro) {
+                    console.log("Não foi possível remover o cursoo");
+                    console.log(erro);
+                    $scope.mensagem = { texto: "Não foi possível remover o curso" };
+                });
+        };
+    });
