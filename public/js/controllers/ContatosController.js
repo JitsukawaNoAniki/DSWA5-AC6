@@ -24,6 +24,7 @@ angular.module('ifsp').controller('ContatosController',
             function(erro) {
                 console.log("Não foi possível remover contato");
                 console.log(erro);
+                $scope.mensagem = { texto: "Não foi possível remover o contato" };
             });
         }
     });
