@@ -20,7 +20,7 @@ angular.module('ifsp').controller('ContatosController',
 
         $scope.remove = function(contato) {
             console.log(contato);
-            Contato.delete({id: contato_id},
+            Contato.delete({id: contato._id},
             buscaContatos,
             function(erro) {
                 console.log("Não foi possível remover contato");
