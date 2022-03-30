@@ -18,13 +18,13 @@ angular.module('ifsp').controller('CursosController',
                 }
             );
         }
-        buscaContatos();
+        buscaCursos();
         $scope.remove = function(curso) {
             console.log(curso);
-            Contato.delete({ id: curso._id },
+            Curso.delete({ id: curso._id },
                 buscaCursos,
                 function(erro) {
-                    console.log("Não foi possível remover o cursoo");
+                    console.log("Não foi possível remover o curso");
                     console.log(erro);
                     $scope.mensagem = { texto: "Não foi possível remover o curso" };
                 });
